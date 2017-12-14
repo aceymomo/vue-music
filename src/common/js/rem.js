@@ -5,9 +5,9 @@ export const remjs = (function(doc, win) {
             var clientWidth = docEl.clientWidth;
             if (!clientWidth) return;
             if (clientWidth >= 640) {
-                docEl.style.fontSize = '100px';
+                docEl.style.fontSize = '80px';
             } else {
-                docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+                docEl.style.fontSize = 80 * (clientWidth / 640) + 'px';
             }
         };
 
