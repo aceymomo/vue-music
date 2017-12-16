@@ -2,7 +2,9 @@
   <div id="app">
     <M-header></M-header>
     <Tab></Tab>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -24,7 +26,12 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  text-align: center
   color: #2c3e50
   font-size:$font-size-small-s
+  .swiper-pagination-bullet
+    background :$color-text-l
+  .swiper-pagination-bullet-active
+    width:.4rem
+    border-radius:.1rem
+    background :$color-text-ll
 </style>

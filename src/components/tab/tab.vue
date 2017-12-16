@@ -26,6 +26,7 @@ export default{}
   .tab-item
     flex:1
     font-size:0
+    text-align :center
     .tab-link
       font-size:$font-size-medium
       color:$color-text-l
