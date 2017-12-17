@@ -1,13 +1,13 @@
 <template>
   <div class="recommend">
-    <scroll class="recommend-content" :data="discList">
+    <scroll ref="scroll" class="recommend-content" :data="discList">
       <div>
         <div class="slider-wrapper">
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
             <swiper-slide v-for="banner in recommends" :key="banner.url">
               <a :href="banner.linkUrl">
-                <img :src="banner.picUrl">
+                <img class="needsclick" @load="loadImage" :src="banner.picUrl">
               </a>
             </swiper-slide>
             <!-- Optional controls -->
@@ -18,7 +18,7 @@
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
             <li class="recom-wrapper" v-for="item in discList">
-              <img :src="item.imgurl">
+              <img v-lazy="item.imgurl">
               <div class="recom-text">
                 <h3>{{item.creator.name}}</h3>
                 <span>{{item.dissname}}</span>
@@ -26,6 +26,9 @@
             </li>
           </ul>
         </div>
+      </div>
+      <div class="loading-container">
+        <loading></loading>
       </div>
     </scroll>
   </div>
@@ -35,6 +38,7 @@ import {getRecommend,getListcode} from '@/api/recommend'
 import {ERR_OK} from '@/api/config'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Scroll from '@/base/scroll/scroll'
+import Loading from '@/base/loading/loading'
 import 'swiper/dist/css/swiper.css'
 export default{
   data(){
@@ -63,6 +67,12 @@ export default{
     }
   },
   methods:{
+    loadImage() {
+      if (!this.checkloaded) {
+        this.checkloaded = true
+        this.$refs.scroll.refresh()
+      }
+    },
     _getRecommend() {
       getRecommend().then((res) => {
         if (res.code === ERR_OK) {
@@ -81,7 +91,8 @@ export default{
   components:{
     swiper,
     swiperSlide,
-    Scroll
+    Scroll,
+    Loading
   }
 }
 </script>
@@ -132,4 +143,9 @@ export default{
           span
             font-size:$font-size-medium
             color:$color-text-d
+    .loading-container
+      margin-top:2rem
+      display :flex
+      align-items :center
+      justify-content :center
 </style>
