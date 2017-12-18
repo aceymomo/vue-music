@@ -12,12 +12,18 @@ import VueLazyLoad from 'vue-lazyload'
 import './common/stylus/index.styl'
 import 'swiper/dist/css/swiper.css'
 
-fastclick.attach(document.body)
+
 
 Vue.use(VueAwesomeSwiper)
 Vue.use(VueLazyLoad, {
     loading: require('./common/image/timg.gif')
 })
+
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        fastclick.attach(document.body);
+    }, false);
+}
 
 Vue.config.productionTip = false
 
