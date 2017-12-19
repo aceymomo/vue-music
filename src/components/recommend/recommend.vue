@@ -144,8 +144,8 @@ export default{
             font-size:$font-size-medium
             color:$color-text-d
     .loading-container
-      margin-top:2rem
-      display :flex
-      align-items :center
-      justify-content :center
+      position: absolute
+      width: 100%
+      top: 50%
+      transform: translateY(-50%)
 </style>
